@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SVG.js</title>
+  <script src="https://cdn.jsdelivr.net/npm/@svgdotjs/svg.js@3.0/dist/svg.min.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+
+var draw = SVG().addTo('body').size(1500, 900)
+
+getEcran = function(svgdraw,xEcran,yEcran){
+  var group = draw.group()
+  var rect = draw.rect(110, 130).attr({ fill: '#323232' })
+  group.add(rect)
+  var tab = new Array(xEcran);
+  for (var i = 0; i < tab.length; i++) {
+    tab[i] = new Array(yEcran);
+  }
+  for (let x = 1; x <= xEcran; x++) {
+    for (let y = 1; y <= yEcran; y++) {
+      tab[x-1][y-1] = draw.circle(10).move(((x)*10)+(x*2),((y)*10)+(y*2)).attr({ fill: '#4D4D4D' })
+	  group.add(tab[x-1][y-1]);
+    }
+  }
+  return {tab:tab,group:group};
+}
+
+var espace = [];
+var lettreA = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+		
+var lettreB = [[1,1],[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+		
+var lettreC = [[2,1],[3,1],[4,1],[5,1],
+         [1,2],
+	     [1,3],
+	     [1,4],
+	     [1,5],
+	     [1,6],
+	     [2,7],[3,7],[4,7],[5,7],
+	    ];
+		
+var lettreD = [[1,1],[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+		
+var E = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [1,2],
+	     [1,3],
+	     [1,4],[2,4],[3,4],[4,4],[5,4],
+	     [1,5],
+	     [1,6],
+	     [1,7],[2,7],[3,7],[4,7],[5,7],
+	    ];
+
+var F = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [1,2],
+	     [1,3],
+	     [1,4],[2,4],[3,4],[4,4],[5,4],
+	     [1,5],
+	     [1,6],
+	     [1,7],
+	    ];
+
+var G = [[2,1],[3,1],[4,1],
+         [1,2],
+	     [1,3],
+	     [1,4],[4,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+
+var H = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+		
+var I = [[3,1],
+         [3,2],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [3,7],
+	    ];
+		
+var J = [[3,1],[4,1],[5,1],
+         [5,2],
+	     [5,3],
+	     [5,4],
+	     [5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+
+var K = [[1,1],[5,1],
+         [1,2],[4,2],
+	     [1,3],[3,3],
+	     [1,4],[2,4],
+	     [1,5],[3,5],
+	     [1,6],[4,6],
+	     [1,7],[5,7],
+	    ];
+
+var L = [[1,1],
+         [1,2],
+	     [1,3],
+	     [1,4],
+	     [1,5],
+	     [1,6],
+	     [1,7],[2,7],[3,7],[4,7],[5,7],
+	    ];	
+var M = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[2,3],[4,3],[5,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var N = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[2,3],[5,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[4,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var O = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var P = [[1,1],[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [1,5],
+	     [1,6],
+	     [1,7],
+	    ];
+var Q = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[4,6],
+	     [2,7],[3,7],[5,7],
+	    ];
+		
+var R = [[1,1],[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var S = [[2,1],[3,1],[4,1],[5,1],
+         [1,2],
+	     [1,3],
+	     [2,4],[3,4],[4,4],
+	     [5,5],
+	     [5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+var T = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [3,2],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [3,7],
+	    ];
+var U = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var V = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [2,4],[4,4],
+	     [2,5],[4,5],
+	     [3,6],
+	     [3,7],
+	    ];
+var W = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[3,3],[5,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[3,5],[5,5],
+	     [1,6],[2,6],[4,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+		
+var X = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [2,3],[4,3],
+	     [3,4],
+	     [2,5],[4,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var Y = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [2,3],[4,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [3,7],
+	    ];
+var Z = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [5,2],
+	     [4,3],
+	     [3,4],
+	     [2,5],
+	     [1,6],
+	     [1,7],[2,7],[3,7],[4,7],[5,7],
+	    ];
+
+var lettrea = [[2,3],[3,3],[4,3],
+              [5,4],
+	          [2,5],[3,5],[4,5],[5,5],
+	          [1,6],[5,6],
+			  [2,7],[3,7],[4,7],[5,7],
+	    ];
+var lettreb = [[1,1],
+         [1,2],
+	     [1,3],[2,3],[3,3],[4,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+var lettrec = [[2,3],[3,3],[4,3],[5,3],
+	     [1,4],
+	     [1,5],
+	     [1,6],
+	     [2,7],[3,7],[4,7],[5,7],
+	    ];
+var lettred = [[5,1],
+         [5,2],
+	     [2,3],[3,3],[4,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],[5,7],
+	    ];
+var lettree = [[2,3],[3,3],[4,3],
+	     [1,4],[5,4],
+	     [1,5],[2,5],[3,5],[4,5],[5,5],
+	     [1,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var lettref = [[3,1],[4,1],
+         [2,2],
+	     [2,3],[3,3],
+	     [2,4],
+	     [2,5],
+	     [2,6],
+	     [2,7],
+	    ];
+var lettreg = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[5,4],
+	     [2,5],[3,5],[4,5],[5,5],
+	     [5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var lettreh = [[1,1],
+         [1,2],
+	     [1,3],[2,3],[3,3],[4,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var lettrei = [[3,1],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [3,7],
+	    ];
+var lettrej = [[4,1],
+	     [4,3],
+	     [4,4],
+	     [4,5],
+	     [4,6],
+	     [2,7],[3,7],
+	    ];
+var lettrek = [[1,1],
+		 [1,2],
+	     [1,3],[5,3],
+	     [1,4],[4,4],
+	     [1,5],[2,5],[3,5],
+	     [1,6],[4,6],
+	     [1,7],[5,7],
+	    ];
+var lettrel = [[3,1],
+         [3,2],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [4,7],
+	    ];
+var lettrem = [[2,3],[4,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[3,5],[5,5],
+	     [1,6],[3,6],[5,6],
+	     [1,7],[3,7],[5,7],
+	    ];
+var lettren = [[2,3],[3,3],[4,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [1,7],[5,7],
+	    ];
+var lettreo = [[2,3],[3,3],[4,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+
+var lettrep = [[1,2],[2,2],[3,2],[4,2],
+         [1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[2,5],[3,5],[4,5],
+	     [1,6],
+	     [1,7],
+	    ];
+var lettreq = [[2,2],[3,2],[4,2],[5,2],
+         [1,3],[5,3],
+	     [1,4],[5,4],
+	     [2,5],[3,5],[4,5],[5,5],
+	     [5,6],
+	     [5,7],
+	    ];
+var lettrer = [[2,3],[3,3],[4,3],[5,3],
+	     [1,4],
+	     [1,5],
+	     [1,6],
+	     [1,7],
+	    ];
+
+var lettres = [[2,3],[3,3],[4,3],
+              [1,4],
+	          [2,5],[3,5],[4,5],
+	          [5,6],
+			  [2,7],[3,7],[4,7],
+	    ];
+var lettret = [[3,1],
+         [3,2],
+	     [2,3],[3,3],[4,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [4,7],[5,7],
+	    ];
+var lettreu = [[1,3],[5,3],
+	     [1,4],[5,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var lettrev = [[1,3],[5,3],
+	     [1,4],[5,4],
+	     [2,5],[4,5],
+	     [2,6],[4,6],
+	     [3,7],
+	    ];
+var lettrew = [[1,3],[3,3],[5,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[3,5],[5,5],
+	     [1,6],[3,6],[5,6],
+	     [2,7],[4,7],
+	    ];
+var lettrex = [[1,3],[5,3],
+	     [2,4],[4,4],
+	     [3,5],
+	     [2,6],[4,6],
+	     [1,7],[5,7],
+	    ];
+var lettrey = [[1,2],[5,2],
+	          [1,3],[5,3],
+              [1,4],[5,4],
+	          [2,5],[3,5],[4,5],[5,5],
+	          [5,6],
+			  [2,7],[3,7],[4,7],
+	    ];
+var lettrez = [[1,3],[2,3],[3,3],[4,3],[5,3],
+	     [4,4],
+	     [3,5],
+	     [2,6],
+	     [1,7],[2,7],[3,7],[4,7],[5,7],
+	    ];
+var chiffre0 = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[4,3],[5,3],
+	     [1,4],[3,4],[5,4],
+	     [1,5],[2,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var chiffre1 = [[3,1],
+		 [2,2],[3,2],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,6],
+	     [3,7],
+	    ];
+var chiffre2 = [[1,1],[2,1],[3,1],[4,1],
+         [5,2],
+	     [5,3],
+	     [4,4],
+	     [3,5],
+	     [2,6],
+	     [1,7],[2,7],[3,7],[4,7],[5,7],
+	    ];
+var chiffre3 = [[1,1],[2,1],[3,1],[4,1],
+         [5,2],
+	     [5,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [5,5],
+	     [5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+var chiffre4 = [[1,1],[5,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [1,4],[2,4],[3,4],[4,4],[5,4],
+	     [5,5],
+	     [5,6],
+	     [5,7],
+	    ];
+var chiffre5 = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [1,2],
+	     [1,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [5,5],
+	     [5,6],
+	     [1,7],[2,7],[3,7],[4,7],
+	    ];
+var chiffre6 = [[2,1],[3,1],[4,1],
+         [1,2],
+	     [1,3],
+	     [1,4],[2,4],[3,4],[4,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var chiffre7 = [[1,1],[2,1],[3,1],[4,1],[5,1],
+         [5,2],
+	     [5,3],
+	     [4,4],
+	     [4,5],
+	     [3,6],
+	     [3,7],
+	    ];
+
+var chiffre8 = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [2,4],[3,4],[4,4],
+	     [1,5],[5,5],
+	     [1,6],[5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var chiffre9 = [[2,1],[3,1],[4,1],
+         [1,2],[5,2],
+	     [1,3],[5,3],
+	     [2,4],[3,4],[4,4],[5,4],
+	     [5,5],
+	     [5,6],
+	     [2,7],[3,7],[4,7],
+	    ];
+var careclam = [[3,1],
+         [3,2],
+	     [3,3],
+	     [3,4],
+	     [3,5],
+	     [3,7],
+	    ];
+var carintero = [[1,1],[2,1],[3,1],[4,1],
+         [5,2],
+	     [5,3],
+	     [4,4],
+	     [3,5],
+	     [3,7],
+	    ];
+var affiche = function(ecran , lettre){
+  for (var j = 0; j < lettre.length; j++){
+    ecran.tab[(lettre[j][0])]
+	         [(lettre[j][1])].attr({ fill: '#FBF91B' })
+  }
+  return ecran;
+}
+
+var efface = function(ecran){
+  for (let x = 1; x <= 7; x++) {
+    for (let y = 1; y <= 9; y++) {
+      ecran.tab[x-1][y-1].attr({ fill: '#4D4D4D' })
+    }
+  }
+}
+
+var getLettre = function( lettre ){
+	if(lettre == " ") return espace;
+	if(lettre == "A") return lettreA;
+	if(lettre == "B") return lettreB;
+	if(lettre == "C") return lettreC;
+	if(lettre == "D") return lettreD;
+	if(lettre == "E") return E;
+	if(lettre == "F") return F;
+	if(lettre == "G") return G;
+	if(lettre == "H") return H;
+	if(lettre == "I") return I;
+	if(lettre == "J") return J;
+	if(lettre == "K") return K;
+	if(lettre == "L") return L;
+	if(lettre == "M") return M;
+	if(lettre == "N") return N;
+	if(lettre == "O") return O;
+	if(lettre == "P") return P;
+	if(lettre == "Q") return Q;
+	if(lettre == "R") return R;
+	if(lettre == "S") return S;
+	if(lettre == "T") return T;
+	if(lettre == "U") return U;
+	if(lettre == "V") return V;
+	if(lettre == "W") return W;
+	if(lettre == "X") return X;
+	if(lettre == "Y") return Y;
+	if(lettre == "Z") return Z;
+	if(lettre == "a") return lettrea;
+	if(lettre == "b") return lettreb;
+	if(lettre == "c") return lettrec;
+	if(lettre == "d") return lettred;
+	if(lettre == "e") return lettree;
+	if(lettre == "f") return lettref;
+	if(lettre == "g") return lettreg;
+	if(lettre == "h") return lettreh;
+	if(lettre == "i") return lettrei;
+	if(lettre == "j") return lettrej;
+	if(lettre == "k") return lettrek;
+	if(lettre == "l") return lettrel;
+	if(lettre == "m") return lettrem;
+	if(lettre == "n") return lettren;
+	if(lettre == "o") return lettreo;
+	if(lettre == "p") return lettrep;
+	if(lettre == "q") return lettreq;
+	if(lettre == "r") return lettrer;
+	if(lettre == "s") return lettres;
+	if(lettre == "t") return lettret;
+	if(lettre == "u") return lettreu;
+	if(lettre == "v") return lettrev;
+	if(lettre == "w") return lettrew;
+	if(lettre == "x") return lettrex;
+	if(lettre == "y") return lettrey;
+	if(lettre == "z") return lettrez;
+	if(lettre == "0") return chiffre0;
+	if(lettre == "1") return chiffre1;
+	if(lettre == "2") return chiffre2;
+	if(lettre == "3") return chiffre3;
+	if(lettre == "4") return chiffre4;
+	if(lettre == "5") return chiffre5;
+	if(lettre == "6") return chiffre6;
+	if(lettre == "7") return chiffre7;
+	if(lettre == "8") return chiffre8;
+	if(lettre == "9") return chiffre9;
+	if(lettre == "!") return careclam;
+	if(lettre == "?") return carintero;
+}
+
+for (let asciiLettre = 65;asciiLettre<80;asciiLettre++ ){
+	affiche(getEcran(draw, 7, 9),getLettre(String.fromCharCode(asciiLettre))).group.move((asciiLettre-65)*100,0);
+}
+for (let asciiLettre = 80;asciiLettre<91;asciiLettre++ ){
+	affiche(getEcran(draw, 7, 9),getLettre(String.fromCharCode(asciiLettre))).group.move((asciiLettre-80)*100,120);
+}
+for (let asciiLettre = 97;asciiLettre<113;asciiLettre++ ){
+	affiche(getEcran(draw, 7, 9),getLettre(String.fromCharCode(asciiLettre))).group.move((asciiLettre-97)*100,240);
+}
+for (let asciiLettre = 113;asciiLettre<123;asciiLettre++ ){
+	affiche(getEcran(draw, 7, 9),getLettre(String.fromCharCode(asciiLettre))).group.move((asciiLettre-113)*100,360);
+}
+
+for (let asciiLettre = 0;asciiLettre<10;asciiLettre++ ){
+	affiche(getEcran(draw, 7, 9),getLettre(asciiLettre.toString())).group.move(asciiLettre*100,480);
+}
+
+affiche(getEcran(draw, 7, 9),getLettre("!")).group.move(0,600);
+affiche(getEcran(draw, 7, 9),getLettre("?")).group.move(100,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(200,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(300,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(400,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(500,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(600,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(700,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(800,600);
+affiche(getEcran(draw, 7, 9),getLettre(" ")).group.move(900,600);
+</script>
+</html>
